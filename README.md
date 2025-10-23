@@ -182,7 +182,7 @@ docker-compose up --build
 
 ## 👥 Contribuidores
 
-Equipe **PTaaS Development** – Kodeza
+Equipe **PTaaS Development** – CyberVigil
 
 * Ruben Baqui
 * Artur Lopes
