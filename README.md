@@ -191,9 +191,6 @@ Equipe **PTaaS Development** – Kodeza
 * Ivan Mubai
 * António Urdaneta
 
-```
-
----
 
 
 
