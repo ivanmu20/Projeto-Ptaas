@@ -1,208 +1,199 @@
-# Projeto-Ptaas
-PTaaS (Penetration Testing as a Service) é uma aplicação web em Python que automatiza a análise de vulnerabilidades em websites com ferramentas como OWASP ZAP e Nikto. O sistema permite inserir uma URL, executar o scan e gerar relatórios HTML claros com níveis de severidade das falhas.
+---
 
-Perfeito, Ivan 👏
-Aqui vai o **`README.md` completo e profissional**, já formatado para GitHub, com:
+```markdown
+# 🛡️ PTaaS — Penetration Testing as a Service
 
-* 🧠 Descrição do projeto
-* 🛠️ Stack usada
-* ⚙️ Instruções de uso
-* 📂 Estrutura completa (frontend + backend + docs)
-* ✅ TODO list (tree visual com as tarefas por fazer)
+O **PTaaS** é uma plataforma web desenvolvida em **Python** que automatiza testes de penetração em websites.  
+A aplicação permite ao usuário inserir uma URL, realizar varreduras de segurança com ferramentas como **OWASP ZAP** e **Nikto**, e gerar relatórios detalhados em **HTML/PDF**.  
+
+O objetivo é oferecer uma solução **segura**, **automatizada** e **escalável** de análise de vulnerabilidades para empresas, profissionais de cibersegurança e desenvolvedores.
 
 ---
 
-````markdown
-# 🛡️ PTaaS – Penetration Testing as a Service
+## 🚀 Stack Tecnológica
 
-O **PTaaS (Penetration Testing as a Service)** é uma aplicação web em Python que automatiza a análise de vulnerabilidades em websites.  
-O sistema permite inserir uma URL, executar o scan com ferramentas como **OWASP ZAP**, **Nikto** ou **Wapiti**, e gerar relatórios em **HTML** com níveis de severidade (Alta, Média, Baixa).
+**Frontend:**  
+- React.js / Next.js  
+- TypeScript  
+- TailwindCSS  
 
-> 🎯 Objetivo da MVP: Criar um protótipo funcional (MVP) que realiza um scan de vulnerabilidades e exibe um relatório simples via interface web.
+**Backend:**  
+- Python (FastAPI + SQLAlchemy + Pydantic)  
+- OWASP ZAP / Nikto (para varreduras automatizadas)  
+- Celery + Redis (para filas de tarefas e monitoramento)  
+- PostgreSQL (via Supabase)  
+
+**Infraestrutura:**  
+- Docker e Docker Compose  
+- Nginx (proxy reverso e SSL/TLS)  
+- CI/CD (GitHub Actions)  
+
+**Segurança:**  
+- JWT (autenticação segura)  
+- Criptografia AES/RSA  
+- HTTPS com certificados SSL  
 
 ---
 
-## 🧱 Stack Tecnológica
+## 📐 Arquitetura (MVC)
 
-| Camada | Tecnologias | Descrição |
-|--------|--------------|------------|
-| **Frontend** | HTML5, CSS3, JavaScript, Bootstrap, Jinja2 (via Flask) | Interface leve e funcional |
-| **Backend** | Python 3 + Flask (ou FastAPI) | API simples para envio de URLs e execução do scanner |
-| **Scanner** | OWASP ZAP (CLI ou Daemon), Nikto, Wapiti | Ferramentas de segurança open-source |
-| **Relatórios** | JSON → HTML (renderizado com Jinja2) | Exibição de vulnerabilidades e recomendações |
-| **Hospedagem** | Localhost / Render / Glitch | Gratuito para testes e apresentação |
-| **Controle de versão** | Git + GitHub | Organização e colaboração da equipa |
+O projeto segue a arquitetura **MVC (Model-View-Controller)** adaptada para **FastAPI + React**.
+
+### 🔹 Model (M)
+Define as estruturas de dados e as regras de negócio.  
+Inclui **Usuários**, **Relatórios**, **Scans**, **Histórico de Execuções** e **Agendamentos**.  
+Implementado com **SQLAlchemy**, garantindo consistência e segurança dos dados.
+
+### 🔹 View (V)
+Interface web desenvolvida em **React/Next.js**.  
+Permite:
+- Inserir URLs para análise  
+- Acompanhar progresso das varreduras  
+- Visualizar e baixar relatórios  
+- Gerir usuários e histórico de testes  
+
+### 🔹 Controller (C)
+Camada de controle (API FastAPI).  
+Gerencia:
+- Criação de scans (`/scan/start`)  
+- Consulta de resultados (`/scan/report/{id}`)  
+- Autenticação (`/auth/login`, `/auth/register`)  
+- Agendamento de tarefas com Celery  
 
 ---
 
-## ⚙️ Como Executar o Projeto
+## 📂 Estrutura de Diretórios
 
-### 🔸 1. Clonar o repositório principal
-```bash
-git clone https://github.com/ivanmu20/Projeto-Ptaas.git
-cd Projeto-Ptaas
+```
+
+ptaas/
+├── backend/
+│   ├── app/
+│   │   ├── controllers/         # Rotas e controladores FastAPI
+│   │   ├── models/              # Models SQLAlchemy
+│   │   ├── schemas/             # Pydantic (validação de dados)
+│   │   ├── services/            # Lógica de negócios e integração ZAP/Nikto
+│   │   ├── middlewares/         # Autenticação, logs, CORS, etc.
+│   │   ├── config/              # Variáveis de ambiente e inicialização
+│   │   └── main.py              # Ponto de entrada FastAPI
+│   ├── tests/                   # Testes unitários e integração
+│   └── requirements.txt
+│
+├── frontend/
+│   ├── public/
+│   ├── src/
+│   │   ├── components/          # Componentes reutilizáveis (Cards, Modals, Tables)
+│   │   ├── pages/               # Páginas principais (Dashboard, Scan, Login)
+│   │   ├── hooks/               # Hooks personalizados
+│   │   ├── services/            # Comunicação com API (Axios)
+│   │   └── styles/              # Tailwind e CSS global
+│   └── package.json
+│
+├── docs/                        # Documentação técnica e relatórios
+├── infra/                       # Configurações Docker/Kubernetes
+├── .env.example                 # Variáveis de ambiente de exemplo
+├── docker-compose.yml
+└── README.md
+
 ````
 
-### 🔸 2. Configurar ambiente virtual
+---
+
+## 🔧 Configuração de Ambiente com Git
+
+### Estrutura de Branches
+- **main** → Produção (versão estável).  
+- **staging** → Homologação e testes.  
+- **dev-nome** → Branch individual de desenvolvimento.
+
+### Setup do Repositório
+```bash
+# Clonar o repositório
+git clone git@github.com:org/ptaas.git
+cd ptaas
+
+# Criar branches principais
+git checkout -b main
+git checkout -b staging
+git checkout -b dev-meu_nome
+````
+
+### Workflow Sugerido
+
+1. Desenvolva na sua branch (`dev-meu_nome`).
+2. Envie PR para `staging` após concluir a feature.
+3. Após revisão, merge para `main` (produção).
+
+---
+
+## 🧰 Git Cheat Sheet
+
+| Ação                    | Comando                                    |
+| ----------------------- | ------------------------------------------ |
+| Configurar nome e email | `git config --global user.name "Seu Nome"` |
+| Clonar repositório      | `git clone <url>`                          |
+| Criar nova branch       | `git checkout -b feature/nome`             |
+| Adicionar mudanças      | `git add .`                                |
+| Fazer commit            | `git commit -m "Descrição da mudança"`     |
+| Enviar para remoto      | `git push origin feature/nome`             |
+| Atualizar branch local  | `git pull origin main`                     |
+| Criar Pull Request      | via GitHub                                 |
+| Fazer merge             | `git merge feature/nome`                   |
+
+---
+
+## 🧪 Como Rodar o Projeto (Ambiente Dev)
+
+### Backend (FastAPI)
 
 ```bash
+cd backend
 python -m venv venv
 source venv/bin/activate   # Linux/Mac
 venv\Scripts\activate      # Windows
-```
-
-### 🔸 3. Instalar dependências
-
-```bash
 pip install -r requirements.txt
+uvicorn app.main:app --reload
 ```
 
-### 🔸 4. Executar o servidor Flask
+### Frontend (Next.js)
 
 ```bash
-python backend/app.py
+cd frontend
+npm install
+npm run dev
 ```
 
-### 🔸 5. Aceder à aplicação
-
-Abra no navegador:
-👉 [http://localhost:5000](http://localhost:5000)
-
----
-
-## 📂 Estrutura do Projeto (Tree)
-
-```
-Projeto-Ptaas/
-│
-├── backend/
-│   ├── app.py                # API principal (Flask ou FastAPI)
-│   ├── scanner.py            # Integração com ZAP, Nikto ou Wapiti
-│   ├── reports/              # Relatórios gerados
-│   └── utils/                # Funções auxiliares
-│
-├── frontend/
-│   ├── templates/
-│   │   ├── index.html        # Página inicial (formulário para URL)
-│   │   └── report.html       # Página de relatório
-│   ├── static/
-│   │   ├── style.css         # Estilos da interface
-│   │   └── script.js         # Lógica de front
-│
-├── docs/
-│   ├── README.md             # Documentação técnica e instruções
-│   ├── slides.pdf            # Apresentação final
-│   └── screenshots/          # Imagens do sistema
-│
-├── tests/
-│   ├── test_api.py           # Testes do backend
-│   └── test_frontend.py      # Testes básicos da UI
-│
-├── requirements.txt          # Dependências do Python
-├── .gitignore                # Ignora arquivos desnecessários
-├── LICENSE                   # Licença MIT
-└── README.md                 # Este arquivo
-```
-
----
-
-## ✅ TODO Tree (Planeamento do Desenvolvimento)
-
-### 📅 Semana 1 – Planeamento
-
-* [x] Definir funcionalidade da MVP
-* [x] Escolher ferramentas (ZAP, Nikto, Wapiti)
-* [ ] Criar protótipo da UI
-* [ ] Montar estrutura inicial de pastas
-
-### 🧠 Semana 2 – Desenvolvimento inicial
-
-* [ ] Implementar API Flask para receber URLs
-* [ ] Executar scanner via subprocess
-* [ ] Criar interface básica (HTML + formulário)
-* [ ] Conectar frontend → backend
-
-### ⚙️ Semana 3 – Integração e Relatórios
-
-* [ ] Tratar saída JSON/XML dos scanners
-* [ ] Gerar relatório formatado em HTML
-* [ ] Exibir severidade e recomendações
-
-### 🧪 Semana 4 – Testes e Entrega
-
-* [ ] Realizar testes completos (URLs válidas e inválidas)
-* [ ] Criar documentação técnica (stack, arquitetura, screenshots)
-* [ ] Preparar slides e apresentação final
-
----
-
-## 💡 Exemplo de Execução do Scanner
-
-OWASP ZAP:
+### Com Docker
 
 ```bash
-zap-cli quick-scan --self-contained --spider --scanners all https://exemplo.com
-```
-
-Nikto:
-
-```bash
-nikto -h https://exemplo.com -output report.json
-```
-
-Wapiti:
-
-```bash
-wapiti -u https://exemplo.com -f json -o report.json
+docker-compose up --build
 ```
 
 ---
 
-## 🧾 Estrutura do Relatório (JSON → HTML)
+## ✅ Próximos Passos
 
-```json
-{
-  "url": "https://exemplo.com",
-  "scan_date": "2025-10-23",
-  "vulnerabilities": [
-    {
-      "id": "SQLI-01",
-      "type": "SQL Injection",
-      "severity": "High",
-      "description": "Input não validado em formulário de login.",
-      "recommendation": "Usar consultas parametrizadas e sanitização."
-    }
-  ]
-}
-```
+* Implementar módulo de **agendamento automático de scans**
+* Adicionar **exportação em PDF e envio por e-mail**
+* Integrar **notificações em tempo real** (WebSockets)
+* Configurar **monitoramento de logs e métricas (Prometheus + Grafana)**
 
 ---
 
-## 🧑‍💻 Equipa
+## 👥 Contribuidores
 
-* **Dupla 1:** Backend + Scanner
-* **Dupla 2:** Frontend + Relatórios
-* **Dupla 3:** Testes + Documentação + Apresentação
+Equipe **PTaaS Development** – Kodeza
 
----
-
-## 📄 Licença
-
-Licença MIT © 2025 – Equipa PTaaS
-
----
-
-### 🚀 Próximos Passos (v2.0)
-
-* Autenticação de usuários
-* Banco de dados para histórico de scans
-* Relatórios com gráficos
-* Agendamento de varreduras automáticas
+* Ruben Baqui
+* Artur Lopes
+* Thiago Lima
+* Francisco Fernandes
+* Ivan Mubai
+* António Urdaneta
 
 ```
 
 ---
 
-Se quiser, posso também gerar o **`requirements.txt` básico** com Flask, zap-cli, requests, e jinja2 — assim já podes fazer o primeiro `git push` com tudo preparado.  
-Quer que eu gere esse arquivo também?
-```
+
+
