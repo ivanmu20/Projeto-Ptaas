@@ -1,0 +1,221 @@
+const RGPDScanner = ({ goBack }) => {
+  const [currentView, setCurrentView] = useState('home');
+  const [scanResult, setScanResult] = useState(null);
+
+  const startScan = async () => {
+    setCurrentView('scanning');
+    
+    // TODO: Substituir por chamada real à API
+    // const response = await fetch('/api/rgpd/scan', { method: 'POST' });
+    // const data = await response.json();
+    
+    setTimeout(() => {
+      const mockResult = {
+        compliant: true,
+        score: 520,
+        details: 'Sistema em conformidade com RGPD'
+      };
+      setScanResult(mockResult);
+      setCurrentView('result');
+    }, 3000);
+  };
+
+  const resetScan = () => {
+    setScanResult(null);
+    setCurrentView('home');
+  };
+
+  if (currentView === 'home') {
+    return <RGPDHomePage startScan={startScan} goBack={goBack} />;
+  }
+
+  if (currentView === 'scanning') {
+    return <ScanningPage />;
+  }
+
+  if (currentView === 'result') {
+    return <ResultPage result={scanResult} resetScan={resetScan} />;
+  }
+};
+
+const RGPDHomePage = ({ startScan, goBack }) => {
+  return (
+    <div className="min-h-screen flex items-center justify-center p-8">
+      <div className="max-w-6xl w-full">
+        <button
+          onClick={goBack}
+          className="mb-6 text-gray-400 hover:text-white transition-colors flex items-center gap-2"
+        >
+          <ChevronRight className="w-5 h-5 rotate-180" />
+          Back to scanners
+        </button>
+
+        <div className="bg-white rounded-3xl shadow-2xl overflow-hidden">
+          <div className="bg-gradient-to-r from-green-50 to-white p-8 border-b">
+            <div className="flex items-center gap-3 mb-8">
+              <div className="w-12 h-12 bg-green-600 rounded-full flex items-center justify-center">
+                <Shield className="w-6 h-6 text-white" />
+              </div>
+              <h1 className="text-2xl font-bold text-gray-800">RGPD Scanner</h1>
+            </div>
+          </div>
+
+          <div className="p-12 text-center">
+            <h2 className="text-4xl font-bold text-gray-800 mb-4">
+              Secure Your Compliance
+            </h2>
+            <p className="text-gray-500 text-lg mb-4">
+              Automated penetration testing
+            </p>
+            <p className="text-gray-500 text-lg mb-8">
+              for GDPR/RGPD compliance
+            </p>
+            
+            <button
+              onClick={startScan}
+              className="bg-green-600 hover:bg-green-700 text-white font-semibold px-12 py-4 rounded-lg text-lg transition-all duration-300 transform hover:scale-105 shadow-lg"
+            >
+              Start Free Scan
+            </button>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 p-12 pt-0">
+            <div className="bg-white border-2 border-gray-100 rounded-xl p-6 text-center hover:shadow-lg transition-shadow">
+              <div className="w-16 h-16 bg-cyan-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Shield className="w-8 h-8 text-cyan-600" />
+              </div>
+              <h3 className="font-bold text-gray-800 mb-2">Security</h3>
+              <p className="text-gray-500 text-sm">Testing</p>
+            </div>
+
+            <div className="bg-white border-2 border-gray-100 rounded-xl p-6 text-center hover:shadow-lg transition-shadow">
+              <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <CheckCircle className="w-8 h-8 text-green-600" />
+              </div>
+              <h3 className="font-bold text-gray-800 mb-2">GDPR</h3>
+              <p className="text-gray-500 text-sm">Compliance</p>
+            </div>
+
+            <div className="bg-white border-2 border-gray-100 rounded-xl p-6 text-center hover:shadow-lg transition-shadow">
+              <div className="w-16 h-16 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <svg className="w-8 h-8 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
+              </div>
+              <h3 className="font-bold text-gray-800 mb-2">Fast</h3>
+              <p className="text-gray-500 text-sm">Results</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const ScanningPage = () => {
+  return (
+    <div className="min-h-screen flex items-center justify-center p-8">
+      <div className="max-w-2xl w-full">
+        <div className="bg-white rounded-3xl shadow-2xl p-12 text-center">
+          <div className="flex items-center justify-between mb-8">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 bg-green-600 rounded-full flex items-center justify-center">
+                <Shield className="w-5 h-5 text-white" />
+              </div>
+              <span className="text-xl font-bold text-gray-800">PPD Privacy Scanner</span>
+            </div>
+            <span className="text-sm text-gray-500">PPD Privacy Scanner</span>
+          </div>
+
+          <div className="mb-8">
+            <Loader className="w-24 h-24 text-green-600 mx-auto animate-spin" />
+          </div>
+
+          <h2 className="text-3xl font-bold text-gray-800 mb-4">
+            Scanning Your Application...
+          </h2>
+          <p className="text-gray-500 mb-8">
+            Please wait while we analyze your RGPD compliance
+          </p>
+
+          <div className="w-full bg-gray-200 rounded-full h-2 overflow-hidden">
+            <div className="bg-green-600 h-2 rounded-full animate-pulse" style={{ width: '60%' }}></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const ResultPage = ({ result, resetScan }) => {
+  const isCompliant = result?.compliant;
+
+  return (
+    <div className="min-h-screen flex items-center justify-center p-8">
+      <div className="max-w-2xl w-full">
+        <div className="bg-white rounded-3xl shadow-2xl p-12 text-center relative">
+          <button
+            onClick={resetScan}
+            className="absolute top-6 right-6 text-gray-400 hover:text-gray-600 text-2xl font-bold"
+          >
+            ×
+          </button>
+
+          <div className="flex items-center justify-between mb-8">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 bg-green-600 rounded-full flex items-center justify-center">
+                <Shield className="w-5 h-5 text-white" />
+              </div>
+              <span className="text-xl font-bold text-gray-800">PPD Privacy Scanner</span>
+            </div>
+            <span className="text-sm text-gray-500">PPD Privacy Scanner</span>
+          </div>
+
+          <h2 className={`text-5xl font-bold mb-8 ${isCompliant ? 'text-green-600' : 'text-red-600'}`}>
+            {isCompliant ? 'Compliant' : 'Non-Compliant'}
+          </h2>
+
+          <div className="mb-8 flex justify-center">
+            <div className={`w-32 h-32 rounded-full flex items-center justify-center ${
+              isCompliant ? 'bg-green-100' : 'bg-red-100'
+            }`}>
+              {isCompliant ? (
+                <div className="relative">
+                  <Shield className="w-20 h-20 text-green-600" />
+                  <CheckCircle className="w-10 h-10 text-white absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" />
+                </div>
+              ) : (
+                <div className="relative">
+                  <Shield className="w-20 h-20 text-red-600" />
+                  <XCircle className="w-10 h-10 text-white absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" />
+                </div>
+              )}
+            </div>
+          </div>
+
+          <div className="text-7xl font-bold text-gray-900 mb-2">
+            {result?.score}
+            <span className="text-4xl text-gray-400">+</span>
+          </div>
+
+          <button
+            onClick={resetScan}
+            className={`mt-8 font-semibold px-12 py-4 rounded-lg text-lg transition-all duration-300 transform hover:scale-105 shadow-lg ${
+              isCompliant
+                ? 'bg-green-600 hover:bg-green-700 text-white'
+                : 'bg-red-600 hover:bg-red-700 text-white'
+            }`}
+          >
+            Scan Now
+          </button>
+
+          <div className="mt-8 w-full bg-gray-200 rounded-full h-1 overflow-hidden">
+            <div className={`h-1 rounded-full ${isCompliant ? 'bg-green-600' : 'bg-red-600'}`} style={{ width: '100%' }}></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default App;
