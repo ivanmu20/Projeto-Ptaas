@@ -1,0 +1,49 @@
+APRESENTAÇÃO – MINI PRIVACY CONSOLE (BACKEND)
+PASTA ONDE ESTA SCRIPT
+notepad app.py
+
+1) Entrar na pasta do projeto
+cd C:\dev\mini-privacy
+
+2) Ativar o ambiente virtual
+.venv\Scripts\activate
+
+3) Iniciar o backend (Flask)
+python app.py
+
+(O backend inicia em http://127.0.0.1:5000)
+
+4) Abrir o sistema no navegador
+http://127.0.0.1:5000
+
+5) Teste PII Scanner (no site)
+- Menu: PII Scanner
+- Nome do dataset: clientes_demo
+- Upload do ficheiro: clientes_privacy_demo.csv
+- Clicar: Analisar e guardar
+
+6) Teste Data Inventory
+- Menu: Dashboard
+- Clicar em "Ver" no dataset
+- Mostrar PII detetada por coluna
+
+7) Teste Consent Manager
+- Menu: Consentimentos
+- Email: ana.silva@exemplo.pt
+- Marketing: SIM
+- Analytics: SIM
+- Guardar consentimento
+
+8) Teste DSAR (GDPR)
+- Menu: DSAR
+- Email: ana.silva@exemplo.pt
+- Dataset: clientes_demo
+- Gerar relatório DSAR
+
+9) Prova de backend (JSON)
+- Clicar em "Baixar JSON"
+- Mostrar resposta em formato JSON
+
+10) Encerrar o backend
+Ctrl + C
+
