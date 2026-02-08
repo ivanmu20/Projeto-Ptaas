@@ -1,0 +1,4 @@
+id,nome,email,telefone,nif,iban,nota
+1,Ana Silva,ana.silva@exemplo.pt,+351 912345678,123456789,PT50000201231234567890154,"cliente VIP"
+2,Bruno Costa,bruno@exemplo.pt,963334455,987654321,PT50000201231234567890154,"prefere email"
+3,Carla Mendes,carla.mendes@exemplo.pt,910000111,111222333,PT50000201231234567890154,""
