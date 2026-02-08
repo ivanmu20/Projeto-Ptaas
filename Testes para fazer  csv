@@ -1,0 +1,16 @@
+id,nome,email,telefone,nif,iban,nota
+1,Ana Silva,ana.silva@exemplo.pt,+351 912345678,123456789,PT50000201231234567890154,"cliente VIP"
+2,Bruno Costa,bruno@exemplo.pt,963334455,987654321,PT50000201231234567890154,"prefere email"
+3,Carla Mendes,carla.mendes@exemplo.pt,910000111,111222333,PT50000201231234567890154,""
+
+
+
+
+
+
+id,nome,email,telefone,nif,iban,data_nascimento,nota
+1,Ana Silva,ana.silva@exemplo.pt,+351 912345678,123456789,PT50000201231234567890154,1992-04-12,"cliente VIP"
+2,Bruno Costa,bruno.costa@exemplo.pt,963334455,987654321,PT50000201231234567890154,1988-11-30,"prefere contacto por email"
+3,Carla Mendes,carla.mendes@exemplo.pt,910000111,111222333,PT50000201231234567890154,1995-07-08,""
+4,Diogo Rocha,diogo.rocha@exemplo.pt,919222333,222333444,PT50000201231234567890154,1985-02-20,"dados importados de CRM"
+5,Elisa Fonseca,elisa.fonseca@exemplo.pt,934555666,333444555,PT50000201231234567890154,1999-09-01,"campanha marketing 2025"
